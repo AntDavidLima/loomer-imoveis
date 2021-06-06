@@ -47,4 +47,28 @@ propertiesRouter.post('/', async (req, res) => {
   return res.json(property);
 });
 
+propertiesRouter.put('/:id', async (req, res) => {
+  const propertyRepository = getRepository(Property);
+
+  const { id } = req.params;
+
+  const property = await propertyRepository.findOne(id);
+
+  const updatedProperty = { ...property, ...req.body };
+
+  await propertyRepository.save(updatedProperty);
+
+  return res.json(updatedProperty);
+});
+
+propertiesRouter.delete('/:id', async (req, res) => {
+  const propertyRepository = getRepository(Property);
+
+  const { id } = req.params;
+
+  await propertyRepository.delete({ id });
+
+  return res.json('Sucesso!');
+});
+
 export default propertiesRouter;
