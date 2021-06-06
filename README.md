@@ -39,19 +39,19 @@ Este projeto está sob a licensa MIT. Veja a [LICENSE](LICENSE) para mais inform
 
 Antes de tudo, abra o arquivo ormconfig.json e edite-o de acordo com as configurações do seu banco de dados, que já deve estar criado com o nome de lommer-imoveis
 
-Depois disso rode o seguinte comando na raiz do projeto:
+Depois disso, rode o seguinte comando na raiz do projeto:
 
 ```sh
 yarn
 ```
 
-Agora as migrations do banco de dados com o comando:
+Agora rode as migrations do banco de dados com o comando:
 
 ```sh
 yarn typeorm migration:run
 ```
 
-Agora é só startar o server
+Por fim, é só startar o server
 
 ```sh
   yarn dev:server
