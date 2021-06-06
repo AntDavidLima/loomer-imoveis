@@ -1,20 +1,33 @@
-class Model {
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+@Entity('users')
+class User {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   cpf: string;
 
+  @Column()
   email: string;
 
+  @Column()
   password: string;
 
-  constructor(name: string, cpf: string, email: string, password: string) {
-    this.name = name;
-    this.cpf = cpf;
-    this.email = email;
-    this.password = password;
-  }
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
 
-export default Model;
+export default User;
