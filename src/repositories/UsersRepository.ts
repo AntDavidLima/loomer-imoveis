@@ -8,13 +8,12 @@ class UsersRepository {
   }
 
   public create(
-    id: string,
     name: string,
     cpf: string,
     email: string,
     password: string,
   ): User {
-    const user = new User(id, name, cpf, email, password);
+    const user = new User(name, cpf, email, password);
 
     this.user.push(user);
 

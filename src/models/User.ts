@@ -9,14 +9,7 @@ class Model {
 
   password: string;
 
-  constructor(
-    id: string,
-    name: string,
-    cpf: string,
-    email: string,
-    password: string,
-  ) {
-    this.id = id;
+  constructor(name: string, cpf: string, email: string, password: string) {
     this.name = name;
     this.cpf = cpf;
     this.email = email;
