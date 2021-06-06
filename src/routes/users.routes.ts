@@ -24,8 +24,8 @@ usersRouter.post('/signin', async (req, res) => {
   const authenticateUser = new AuthenticateUserService();
 
   try {
-    const { user } = await authenticateUser.execute({ email, password });
-    return res.json(user);
+    const { user, token } = await authenticateUser.execute({ email, password });
+    return res.json({ user, token });
   } catch (error) {
     return res.json({ erro: error.message });
   }

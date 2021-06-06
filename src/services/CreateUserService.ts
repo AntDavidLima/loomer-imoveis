@@ -1,7 +1,9 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
+import { sign } from 'jsonwebtoken';
 import User from '../models/User';
+import auth from '../config/auth';
 
 interface RequestDTO {
   name: string;
@@ -10,13 +12,18 @@ interface RequestDTO {
   password: string;
 }
 
+interface ResponseDTO {
+  user: User;
+  token: string;
+}
+
 class CreateUserService {
   public async execute({
     name,
     cpf,
     email,
     password,
-  }: RequestDTO): Promise<User> {
+  }: RequestDTO): Promise<ResponseDTO> {
     const userRepository = getRepository(User);
 
     const emailUsed = await userRepository.findOne({
@@ -46,7 +53,9 @@ class CreateUserService {
 
     await userRepository.save(user);
 
-    return user;
+    const token = sign({ id: user.id }, auth.secret, { expiresIn: 86400 });
+
+    return { user, token };
   }
 }
 

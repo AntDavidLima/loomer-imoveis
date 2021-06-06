@@ -1,6 +1,10 @@
 import { compare } from 'bcryptjs';
 import { getRepository } from 'typeorm';
+import { sign } from 'jsonwebtoken';
+
 import User from '../models/User';
+
+import auth from '../config/auth';
 
 interface RequestDTO {
   email: string;
@@ -9,6 +13,7 @@ interface RequestDTO {
 
 interface ResponseDTO {
   user: User;
+  token: string;
 }
 
 class AuthenticateUserService {
@@ -29,7 +34,9 @@ class AuthenticateUserService {
       throw new Error('Senha incorreta!');
     }
 
-    return { user };
+    const token = sign({ id: user.id }, auth.secret, { expiresIn: 86400 });
+
+    return { user, token };
   }
 }
 
